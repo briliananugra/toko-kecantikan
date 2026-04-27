@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\StockTransaction;
+use App\Observers\StockTransactionObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Daftarkan observer untuk StockTransaction
+        // Setiap kali ada transaksi stok, otomatis catat di cash flow
+        StockTransaction::observe(StockTransactionObserver::class);
     }
 }
