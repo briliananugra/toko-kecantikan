@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Attendances\Pages;
+/*namespace App\Filament\Resources\Attendances\Pages;
 
 use App\Filament\Resources\Attendances\AttendanceResource;
 use Filament\Actions\DeleteAction;
@@ -15,5 +15,21 @@ class EditAttendance extends EditRecord
         return [
             DeleteAction::make(),
         ];
+    }
+}*/
+
+namespace App\Filament\Resources\Attendances\Pages;
+
+use App\Filament\Resources\Attendances\AttendanceResource;
+use Filament\Resources\Pages\EditRecord;
+
+class EditAttendance extends EditRecord
+{
+    protected static string $resource = AttendanceResource::class;
+
+    // Setelah save, kembali ke halaman daftar
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
     }
 }

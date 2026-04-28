@@ -3,17 +3,15 @@
 namespace App\Filament\Resources\StockTransactions\Pages;
 
 use App\Filament\Resources\StockTransactions\StockTransactionResource;
-use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 
 class EditStockTransaction extends EditRecord
 {
     protected static string $resource = StockTransactionResource::class;
 
-    protected function getHeaderActions(): array
+    // Setelah save, kembali ke halaman daftar
+    protected function getRedirectUrl(): string
     {
-        return [
-            DeleteAction::make(),
-        ];
+        return $this->getResource()::getUrl('index');
     }
 }
