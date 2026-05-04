@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\StockTransactions\Tables;
 
+use Filament\Actions\DeleteAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -51,6 +54,18 @@ class StockTransactionsTable
                 TextColumn::make('note')
                     ->label('Keterangan')
                     ->limit(30),
+            ])
+            ->actions([
+                // Tombol hapus dengan konfirmasi
+                DeleteAction::make()
+                    ->label('Hapus')
+                    ->requiresConfirmation(),
+            ])
+            ->bulkActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make()
+                        ->label('Hapus yang dipilih'),
+                ]),
             ]);
     }
 }
