@@ -1,88 +1,95 @@
 <x-filament-panels::page>
 
     {{-- Filter Section --}}
-    <div class="fi-section rounded-xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-950/5 p-4 mb-4">
-        <div class="flex flex-wrap gap-4">
-            <select wire:model.live="filter"
-                class="fi-select-input rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-800 py-2 px-3">
+    <div style="background:#1f2937; border-radius:12px; padding:16px; margin-bottom:16px; display:flex; gap:16px; flex-wrap:wrap; align-items:center;">
+        
+        <div>
+            <label style="color:#9ca3af; font-size:12px; display:block; margin-bottom:4px;">Periode</label>
+            <select wire:model.live="filter" style="background:#374151; color:#fff; border:1px solid #4b5563; border-radius:8px; padding:8px 12px;">
                 <option value="daily">Harian</option>
                 <option value="monthly">Bulanan</option>
                 <option value="yearly">Tahunan</option>
             </select>
-
-            @if($filter === 'daily')
-            <input type="date" wire:model.live="selectedDate"
-                class="fi-select-input rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-800 py-2 px-3">
-            @endif
-
-            @if($filter === 'monthly')
-            <input type="month" wire:model.live="selectedMonth"
-                class="fi-select-input rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-800 py-2 px-3">
-            @endif
-
-            @if($filter === 'yearly')
-            <input type="number" wire:model.live="selectedYear"
-                class="fi-select-input rounded-lg border-gray-300 dark:border-gray-700 dark:bg-gray-800 py-2 px-3"
-                min="2020" max="2030">
-            @endif
         </div>
+
+        @if($filter === 'daily')
+        <div>
+            <label style="color:#9ca3af; font-size:12px; display:block; margin-bottom:4px;">Tanggal</label>
+            <input type="date" wire:model.live="selectedDate" style="background:#374151; color:#fff; border:1px solid #4b5563; border-radius:8px; padding:8px 12px;">
+        </div>
+        @endif
+
+        @if($filter === 'monthly')
+        <div>
+            <label style="color:#9ca3af; font-size:12px; display:block; margin-bottom:4px;">Bulan</label>
+            <input type="month" wire:model.live="selectedMonth" style="background:#374151; color:#fff; border:1px solid #4b5563; border-radius:8px; padding:8px 12px;">
+        </div>
+        @endif
+
+        @if($filter === 'yearly')
+        <div>
+            <label style="color:#9ca3af; font-size:12px; display:block; margin-bottom:4px;">Tahun</label>
+            <input type="number" wire:model.live="selectedYear" style="background:#374151; color:#fff; border:1px solid #4b5563; border-radius:8px; padding:8px 12px;" min="2020" max="2030">
+        </div>
+        @endif
+
     </div>
 
     {{-- Kartu Ringkasan --}}
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+    <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:16px;">
 
-        <div class="fi-section rounded-xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-950/5 p-4">
-            <p class="fi-section-description text-sm text-gray-500">Total Pemasukan</p>
-            <p class="text-xl font-bold text-success-600">Rp {{ number_format($this->getTotalIncome(), 0, ',', '.') }}</p>
+        <div style="background:#064e3b; border-radius:12px; padding:16px; border:1px solid #065f46;">
+            <p style="color:#6ee7b7; font-size:12px; margin-bottom:8px;">Total Pemasukan</p>
+            <p style="color:#fff; font-size:20px; font-weight:700;">Rp {{ number_format($this->getTotalIncome(), 0, ',', '.') }}</p>
         </div>
 
-        <div class="fi-section rounded-xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-950/5 p-4">
-            <p class="fi-section-description text-sm text-gray-500">Total Pengeluaran</p>
-            <p class="text-xl font-bold text-danger-600">Rp {{ number_format($this->getTotalExpense(), 0, ',', '.') }}</p>
+        <div style="background:#7f1d1d; border-radius:12px; padding:16px; border:1px solid #991b1b;">
+            <p style="color:#fca5a5; font-size:12px; margin-bottom:8px;">Total Pengeluaran</p>
+            <p style="color:#fff; font-size:20px; font-weight:700;">Rp {{ number_format($this->getTotalExpense(), 0, ',', '.') }}</p>
         </div>
 
-        <div class="fi-section rounded-xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-950/5 p-4">
-            <p class="fi-section-description text-sm text-gray-500">Total Gaji</p>
-            <p class="text-xl font-bold text-warning-600">Rp {{ number_format($this->getTotalSalary(), 0, ',', '.') }}</p>
+        <div style="background:#78350f; border-radius:12px; padding:16px; border:1px solid #92400e;">
+            <p style="color:#fcd34d; font-size:12px; margin-bottom:8px;">Total Gaji</p>
+            <p style="color:#fff; font-size:20px; font-weight:700;">Rp {{ number_format($this->getTotalSalary(), 0, ',', '.') }}</p>
         </div>
 
-        <div class="fi-section rounded-xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-950/5 p-4">
-            <p class="fi-section-description text-sm text-gray-500">Laba Bersih</p>
-            <p class="text-xl font-bold text-primary-600">Rp {{ number_format($this->getNetProfit(), 0, ',', '.') }}</p>
+        <div style="background:#1e3a5f; border-radius:12px; padding:16px; border:1px solid #1e40af;">
+            <p style="color:#93c5fd; font-size:12px; margin-bottom:8px;">Laba Bersih</p>
+            <p style="color:#fff; font-size:20px; font-weight:700;">Rp {{ number_format($this->getNetProfit(), 0, ',', '.') }}</p>
         </div>
 
     </div>
 
     {{-- Tabel Detail --}}
-    <div class="fi-section rounded-xl bg-white dark:bg-gray-900 shadow-sm ring-1 ring-gray-950/5 overflow-hidden">
-        <table class="w-full text-sm divide-y divide-gray-200 dark:divide-gray-700">
+    <div style="background:#1f2937; border-radius:12px; overflow:hidden; border:1px solid #374151;">
+        <table style="width:100%; border-collapse:collapse; font-size:14px;">
             <thead>
-                <tr class="bg-gray-50 dark:bg-gray-800">
-                    <th class="px-4 py-3 text-left font-medium text-gray-600 dark:text-gray-300">Tanggal</th>
-                    <th class="px-4 py-3 text-left font-medium text-gray-600 dark:text-gray-300">Jenis</th>
-                    <th class="px-4 py-3 text-left font-medium text-gray-600 dark:text-gray-300">Kategori</th>
-                    <th class="px-4 py-3 text-left font-medium text-gray-600 dark:text-gray-300">Jumlah</th>
-                    <th class="px-4 py-3 text-left font-medium text-gray-600 dark:text-gray-300">Keterangan</th>
+                <tr style="background:#111827;">
+                    <th style="padding:12px 16px; text-align:left; color:#9ca3af; font-weight:600;">Tanggal</th>
+                    <th style="padding:12px 16px; text-align:left; color:#9ca3af; font-weight:600;">Jenis</th>
+                    <th style="padding:12px 16px; text-align:left; color:#9ca3af; font-weight:600;">Kategori</th>
+                    <th style="padding:12px 16px; text-align:left; color:#9ca3af; font-weight:600;">Jumlah</th>
+                    <th style="padding:12px 16px; text-align:left; color:#9ca3af; font-weight:600;">Keterangan</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+            <tbody>
                 @forelse($this->getTransactions() as $transaction)
-                <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
-                    <td class="px-4 py-3 text-gray-700 dark:text-gray-300">{{ $transaction->date->format('d M Y') }}</td>
-                    <td class="px-4 py-3">
+                <tr style="border-top:1px solid #374151;">
+                    <td style="padding:12px 16px; color:#e5e7eb;">{{ $transaction->date->format('d M Y') }}</td>
+                    <td style="padding:12px 16px;">
                         @if($transaction->type === 'income')
-                            <span class="fi-badge rounded-md px-2 py-1 text-xs font-medium bg-success-100 text-success-700">Pemasukan</span>
+                            <span style="background:#065f46; color:#6ee7b7; padding:2px 8px; border-radius:9999px; font-size:12px; font-weight:600;">Pemasukan</span>
                         @else
-                            <span class="fi-badge rounded-md px-2 py-1 text-xs font-medium bg-danger-100 text-danger-700">Pengeluaran</span>
+                            <span style="background:#991b1b; color:#fca5a5; padding:2px 8px; border-radius:9999px; font-size:12px; font-weight:600;">Pengeluaran</span>
                         @endif
                     </td>
-                    <td class="px-4 py-3 text-gray-700 dark:text-gray-300">{{ ucfirst(str_replace('_', ' ', $transaction->category)) }}</td>
-                    <td class="px-4 py-3 text-gray-700 dark:text-gray-300">Rp {{ number_format($transaction->amount, 0, ',', '.') }}</td>
-                    <td class="px-4 py-3 text-gray-700 dark:text-gray-300">{{ $transaction->description ?? '-' }}</td>
+                    <td style="padding:12px 16px; color:#e5e7eb;">{{ ucfirst(str_replace('_', ' ', $transaction->category)) }}</td>
+                    <td style="padding:12px 16px; color:#e5e7eb;">Rp {{ number_format($transaction->amount, 0, ',', '.') }}</td>
+                    <td style="padding:12px 16px; color:#e5e7eb;">{{ $transaction->description ?? '-' }}</td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="5" class="px-4 py-8 text-center text-gray-400">Tidak ada data</td>
+                    <td colspan="5" style="padding:32px; text-align:center; color:#6b7280;">Tidak ada data</td>
                 </tr>
                 @endforelse
             </tbody>
