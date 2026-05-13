@@ -103,36 +103,36 @@ class LaporanGaji extends Page
         return array_sum(array_column($this->getSalaryData(), 'total_gaji'));
     }
 
-    // Simpan gaji ke cash flow
     public function bayarGaji(): void
     {
         $salaryData = $this->getSalaryData();
+        $bulan = str_pad($this->selectedMonth, 2, '0', STR_PAD_LEFT);
+        $tahun = $this->selectedYear;
 
         foreach ($salaryData as $data) {
-            // Cek apakah gaji bulan ini sudah dibayar
-            $sudahBayar = CashFlow::where('category', 'gaji')
-                ->where('description', 'like', '%' . $data['nama'] . '%')
-                ->whereMonth('date', $this->selectedMonth)
-                ->whereYear('date', $this->selectedYear)
-                ->exists();
+            if ($data['total_gaji'] > 0) {
+                // Cek apakah gaji bulan ini sudah dibayar
+                $sudahBayar = CashFlow::where('category', 'gaji')
+                    ->where('description', 'like', '%' . $data['nama'] . '%')
+                    ->whereMonth('date', $bulan)
+                    ->whereYear('date', $tahun)
+                    ->exists();
 
-            if (!$sudahBayar && $data['total_gaji'] > 0) {
-                CashFlow::create([
-                    'type' => 'expense',
-                    'category' => 'gaji',
-                    'amount' => $data['total_gaji'],
-                    'description' => 'Gaji ' . $data['nama'] . ' bulan ' .
-                        now()->setMonth($this->selectedMonth)->format('F') . ' ' . $this->selectedYear,
-                    'date' => now()->setMonth($this->selectedMonth)
-                        ->setYear($this->selectedYear)->endOfMonth(),
-                ]);
+                if (!$sudahBayar) {
+                    CashFlow::create([
+                        'type' => 'expense',
+                        'category' => 'gaji',
+                        'amount' => $data['total_gaji'],
+                        'description' => 'Gaji ' . $data['nama'] . ' bulan ' . $bulan . '-' . $tahun,
+                        'date' => \Carbon\Carbon::createFromDate($tahun, $bulan, 1)->endOfMonth()->format('Y-m-d'),
+                    ]);
+                }
+                // Notifikasi berhasil
+                \Filament\Notifications\Notification::make()
+                    ->title('Gaji berhasil dicatat!')
+                    ->success()
+                    ->send();
             }
         }
-
-        // Notifikasi berhasil
-        $this->dispatch('notify', [
-            'type' => 'success',
-            'message' => 'Gaji berhasil dicatat ke Cash Flow!',
-        ]);
     }
 }
