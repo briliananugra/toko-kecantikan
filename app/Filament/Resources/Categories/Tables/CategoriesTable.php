@@ -42,6 +42,7 @@ class CategoriesTable
                     DeleteBulkAction::make()
                         ->label('Hapus yang dipilih'),
                 ]),
-            ]);
+            ])
+            ->defaultSort('created_at', 'desc');
     }
 }

@@ -66,6 +66,7 @@ class StockTransactionsTable
                     DeleteBulkAction::make()
                         ->label('Hapus yang dipilih'),
                 ]),
-            ]);
+            ])
+            ->defaultSort('date', 'desc');
     }
 }

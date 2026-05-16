@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Products\Tables;
 
+use Filament\Actions\DeleteAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -42,6 +45,19 @@ class ProductsTable
                 // Kolom satuan barang
                 TextColumn::make('unit')
                     ->label('Satuan'),
-            ]);
+            ])
+            ->actions([
+                // Tombol hapus dengan konfirmasi
+                DeleteAction::make()
+                    ->label('Hapus')
+                    ->requiresConfirmation(),
+            ])
+            ->bulkActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make()
+                        ->label('Hapus yang dipilih'),
+                ]),
+            ])
+            ->defaultSort('created_at', 'desc'); // Data terbaru di atas
     }
 }

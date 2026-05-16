@@ -66,6 +66,7 @@ class CashFlowsTable
                     DeleteBulkAction::make()
                         ->label('Hapus yang dipilih'),
                 ]),
-            ]);
+            ])
+            ->defaultSort('date', 'desc');
     }
 }
