@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Employees\Tables;
 
+use Filament\Actions\DeleteAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -43,13 +46,25 @@ class EmployeesTable
                     ->label('Status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'active' => 'success',    // Hijau untuk aktif
-                        'inactive' => 'danger',   // Merah untuk tidak aktif
+                        'active' => 'success',
+                        'inactive' => 'danger',
                     })
                     ->formatStateUsing(fn (string $state): string => match ($state) {
                         'active' => 'Aktif',
                         'inactive' => 'Tidak Aktif',
                     }),
+            ])
+            ->actions([
+                // Tombol hapus dengan konfirmasi
+                DeleteAction::make()
+                    ->label('Hapus')
+                    ->requiresConfirmation(),
+            ])
+            ->bulkActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make()
+                        ->label('Hapus yang dipilih'),
+                ]),
             ]);
     }
 }

@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\CashFlows\Tables;
 
+use Filament\Actions\DeleteAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -22,8 +25,8 @@ class CashFlowsTable
                     ->label('Jenis')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'income' => 'success',   // Hijau untuk pemasukan
-                        'expense' => 'danger',   // Merah untuk pengeluaran
+                        'income' => 'success',
+                        'expense' => 'danger',
                     })
                     ->formatStateUsing(fn (string $state): string => match ($state) {
                         'income' => 'Pemasukan',
@@ -51,6 +54,18 @@ class CashFlowsTable
                 TextColumn::make('description')
                     ->label('Keterangan')
                     ->limit(30),
+            ])
+            ->actions([
+                // Tombol hapus dengan konfirmasi
+                DeleteAction::make()
+                    ->label('Hapus')
+                    ->requiresConfirmation(),
+            ])
+            ->bulkActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make()
+                        ->label('Hapus yang dipilih'),
+                ]),
             ]);
     }
 }

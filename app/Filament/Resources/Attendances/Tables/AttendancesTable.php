@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Attendances\Tables;
 
+use Filament\Actions\DeleteAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -28,10 +31,10 @@ class AttendancesTable
                     ->label('Status')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
-                        'hadir' => 'success',  // Hijau untuk hadir
-                        'izin' => 'warning',   // Kuning untuk izin
-                        'sakit' => 'info',     // Biru untuk sakit
-                        'alpha' => 'danger',   // Merah untuk alpha
+                        'hadir' => 'success',
+                        'izin' => 'warning',
+                        'sakit' => 'info',
+                        'alpha' => 'danger',
                     })
                     ->formatStateUsing(fn (string $state): string => match ($state) {
                         'hadir' => 'Hadir',
@@ -44,6 +47,18 @@ class AttendancesTable
                 TextColumn::make('note')
                     ->label('Keterangan')
                     ->limit(30),
+            ])
+            ->actions([
+                // Tombol hapus dengan konfirmasi
+                DeleteAction::make()
+                    ->label('Hapus')
+                    ->requiresConfirmation(),
+            ])
+            ->bulkActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make()
+                        ->label('Hapus yang dipilih'),
+                ]),
             ]);
     }
 }
