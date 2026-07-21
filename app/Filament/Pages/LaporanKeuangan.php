@@ -29,12 +29,22 @@ class LaporanKeuangan extends Page implements HasForms
     public ?string $selectedMonth = null;
     public ?string $selectedYear = null;
 
+    // Filter tambahan untuk tabel detail transaksi
+    public ?string $selectedType = null;     // null = semua, 'income', 'expense'
+    public ?string $selectedCategory = null; // null = semua, atau salah satu kategori
+
     public function mount(): void
     {
         // Set default nilai filter
         $this->selectedDate = today()->format('Y-m-d');
         $this->selectedMonth = today()->format('Y-m');
         $this->selectedYear = today()->format('Y');
+    }
+
+    // Livewire otomatis panggil method ini setiap kali $selectedType berubah
+    public function updatedSelectedType(): void
+    {
+        $this->selectedCategory = null;
     }
 
     // Hitung total pemasukan
@@ -83,6 +93,8 @@ class LaporanKeuangan extends Page implements HasForms
             ->when($this->filter === 'monthly', fn($q) => $q->whereYear('date', explode('-', $this->selectedMonth)[0])
                 ->whereMonth('date', explode('-', $this->selectedMonth)[1]))
             ->when($this->filter === 'yearly', fn($q) => $q->whereYear('date', $this->selectedYear))
+            ->when($this->selectedType, fn($q) => $q->where('type', $this->selectedType))
+            ->when($this->selectedCategory, fn($q) => $q->where('category', $this->selectedCategory))
             ->orderBy('date', 'desc')
             ->get();
     }

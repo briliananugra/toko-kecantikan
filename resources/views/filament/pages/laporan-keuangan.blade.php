@@ -33,6 +33,37 @@
         </div>
         @endif
 
+        <div>
+            <label style="color:#9ca3af; font-size:12px; display:block; margin-bottom:4px;">Jenis</label>
+            <select wire:model.live="selectedType" style="background:#374151; color:#fff; border:1px solid #4b5563; border-radius:8px; padding:8px 12px;">
+                <option value="">Semua Jenis</option>
+                <option value="income">Pemasukan</option>
+                <option value="expense">Pengeluaran</option>
+            </select>
+        </div>
+
+        <div>
+            <label style="color:#9ca3af; font-size:12px; display:block; margin-bottom:4px;">Kategori</label>
+            <select wire:model.live="selectedCategory" style="background:#374151; color:#fff; border:1px solid #4b5563; border-radius:8px; padding:8px 12px;">
+                <option value="">Semua Kategori</option>
+                @if($selectedType === 'income')
+                    <option value="penjualan">Penjualan</option>
+                    <option value="lainnya">Lainnya</option>
+                @elseif($selectedType === 'expense')
+                    <option value="gaji">Gaji Karyawan</option>
+                    <option value="pembelian_stok">Pembelian Stok</option>
+                    <option value="operasional">Operasional</option>
+                    <option value="lainnya">Lainnya</option>
+                @else
+                    <option value="penjualan">Penjualan</option>
+                    <option value="gaji">Gaji Karyawan</option>
+                    <option value="pembelian_stok">Pembelian Stok</option>
+                    <option value="operasional">Operasional</option>
+                    <option value="lainnya">Lainnya</option>
+                @endif
+            </select>
+        </div>
+
     </div>
 
     {{-- Kartu Ringkasan --}}
