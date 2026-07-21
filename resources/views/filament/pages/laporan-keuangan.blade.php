@@ -66,6 +66,17 @@
 
     </div>
 
+    <div style="display:flex; gap:8px; margin-bottom:16px;">
+        <button wire:click="exportPdf"
+            style="background:#dc2626; color:#fff; border:none; border-radius:8px; padding:10px 16px; font-weight:600; cursor:pointer;">
+            📄 Export PDF
+        </button>
+        <button wire:click="exportExcel"
+            style="background:#16a34a; color:#fff; border:none; border-radius:8px; padding:10px 16px; font-weight:600; cursor:pointer;">
+            📊 Export Excel
+        </button>
+    </div>
+
     {{-- Kartu Ringkasan --}}
     <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:16px;">
 

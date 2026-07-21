@@ -43,6 +43,17 @@
 
     </div>
 
+    <div style="display:flex; gap:8px; margin-bottom:16px;">
+        <button wire:click="exportPdf"
+            style="background:#dc2626; color:#fff; border:none; border-radius:8px; padding:10px 16px; font-weight:600; cursor:pointer;">
+            📄 Export PDF
+        </button>
+        <button wire:click="exportExcel"
+            style="background:#16a34a; color:#fff; border:none; border-radius:8px; padding:10px 16px; font-weight:600; cursor:pointer;">
+            📊 Export Excel
+        </button>
+    </div>
+
     {{-- Info Dasar Hukum --}}
     <div style="background:#1e3a5f; border-radius:12px; padding:12px 16px; margin-bottom:16px; border:1px solid #1e40af;">
         <p style="color:#93c5fd; font-size:12px; margin:0;">

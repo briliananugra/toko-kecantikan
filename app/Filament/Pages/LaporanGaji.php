@@ -6,6 +6,9 @@ use App\Models\Attendance;
 use App\Models\Employee;
 use App\Models\CashFlow;
 use Filament\Pages\Page;
+use App\Exports\LaporanGajiExport;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanGaji extends Page
 {
@@ -134,5 +137,30 @@ class LaporanGaji extends Page
                     ->send();
             }
         }
+    }
+
+    // Export ke PDF
+    public function exportPdf()
+    {
+        $pdf = Pdf::loadView('pdf.laporan-gaji', [
+            'salaryData' => $this->getSalaryData(),
+            'totalGaji' => $this->getTotalGaji(),
+            'bulan' => $this->selectedMonth,
+            'tahun' => $this->selectedYear,
+        ]);
+
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            'laporan-gaji-' . $this->selectedYear . '-' . $this->selectedMonth . '.pdf'
+        );
+    }
+
+    // Export ke Excel
+    public function exportExcel()
+    {
+        return Excel::download(
+            new LaporanGajiExport($this->getSalaryData()),
+            'laporan-gaji-' . $this->selectedYear . '-' . $this->selectedMonth . '.xlsx'
+        );
     }
 }
