@@ -20,6 +20,8 @@ class UserResource extends Resource
 
     protected static ?string $navigationLabel = 'Users';
 
+    protected static ?int $navigationSort = 9;
+
     protected static ?string $recordTitleAttribute = 'name';
 
     // Menu ini hanya bisa diakses Owner

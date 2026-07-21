@@ -18,7 +18,11 @@ class CashFlowResource extends Resource
 {
     protected static ?string $model = CashFlow::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedWallet;
+
+    protected static ?string $navigationLabel = 'Kas';
+
+    protected static ?int $navigationSort = 6;
 
     protected static ?string $recordTitleAttribute = 'description';
 

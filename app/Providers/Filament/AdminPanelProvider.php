@@ -28,6 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('Portal Manajemen Toko')
             ->colors([
                 'primary' => Color::Amber,
             ])

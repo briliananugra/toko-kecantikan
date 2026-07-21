@@ -22,6 +22,7 @@ class LaporanKeuangan extends Page implements HasForms
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationLabel = 'Laporan Keuangan';
     protected static ?string $title = 'Laporan Keuangan';
+    protected static ?int $navigationSort = 8;
 
     // Halaman ini hanya bisa diakses Owner
     public static function canAccess(): bool

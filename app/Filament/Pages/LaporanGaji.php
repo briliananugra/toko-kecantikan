@@ -16,6 +16,7 @@ class LaporanGaji extends Page
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-banknotes';
     protected static ?string $navigationLabel = 'Laporan Gaji';
     protected static ?string $title = 'Laporan Gaji Karyawan';
+    protected static ?int $navigationSort = 7;
 
     // Halaman ini hanya bisa diakses Owner
     public static function canAccess(): bool

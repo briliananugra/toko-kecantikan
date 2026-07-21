@@ -18,7 +18,11 @@ class StockTransactionResource extends Resource
 {
     protected static ?string $model = StockTransaction::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArrowsRightLeft;
+
+    protected static ?string $navigationLabel = 'Transaksi Stok';
+
+    protected static ?int $navigationSort = 5;
 
     protected static ?string $recordTitleAttribute = 'note';
 
