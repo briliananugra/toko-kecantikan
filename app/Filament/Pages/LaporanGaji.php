@@ -17,6 +17,12 @@ class LaporanGaji extends Page
     protected static ?string $navigationLabel = 'Laporan Gaji';
     protected static ?string $title = 'Laporan Gaji Karyawan';
 
+    // Halaman ini hanya bisa diakses Owner
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->isOwner() ?? false;
+    }
+
     // Template halaman
     protected string $view = 'filament.pages.laporan-gaji';
 

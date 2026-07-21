@@ -23,6 +23,12 @@ class LaporanKeuangan extends Page implements HasForms
     protected static ?string $navigationLabel = 'Laporan Keuangan';
     protected static ?string $title = 'Laporan Keuangan';
 
+    // Halaman ini hanya bisa diakses Owner
+    public static function canAccess(): bool
+    {
+        return auth()->user()?->isOwner() ?? false;
+    }
+
     // Template halaman
     protected string $view = 'filament.pages.laporan-keuangan';
 
