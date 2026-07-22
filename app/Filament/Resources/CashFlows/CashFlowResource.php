@@ -26,6 +26,10 @@ class CashFlowResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'description';
 
+    protected static ?string $modelLabel = 'Kas';
+
+    protected static ?string $pluralModelLabel = 'Kas';
+
     public static function form(Schema $schema): Schema
     {
         return CashFlowForm::configure($schema);

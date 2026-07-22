@@ -26,6 +26,10 @@ class EmployeeResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static ?string $modelLabel = 'Karyawan';
+
+    protected static ?string $pluralModelLabel = 'Karyawan';
+
     public static function form(Schema $schema): Schema
     {
         return EmployeeForm::configure($schema);

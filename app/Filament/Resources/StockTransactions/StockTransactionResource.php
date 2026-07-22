@@ -26,6 +26,10 @@ class StockTransactionResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'note';
 
+    protected static ?string $modelLabel = 'Transaksi Stok';
+
+    protected static ?string $pluralModelLabel = 'Transaksi Stok';
+
     public static function form(Schema $schema): Schema
     {
         return StockTransactionForm::configure($schema);

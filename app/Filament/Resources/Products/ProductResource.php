@@ -26,6 +26,10 @@ class ProductResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    protected static ?string $modelLabel = 'Produk';
+
+    protected static ?string $pluralModelLabel = 'Produk';
+
     public static function form(Schema $schema): Schema
     {
         return ProductForm::configure($schema);

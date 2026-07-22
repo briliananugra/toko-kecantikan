@@ -19,14 +19,14 @@ class LowStockWidget extends BaseWidget
     {
         return $table
             ->query(
-                // Ambil produk dengan stok kurang dari 10
+                // Ambil semua produk dengan stok kurang dari 10, diurutkan dari yang paling rendah
                 Product::query()->where('stock', '<', 10)->orderBy('stock')
             )
+            ->paginated([5]) // Tampil 5 per halaman, dengan tombol next untuk lihat sisanya
             ->columns([
                 // Kolom nama produk
                 TextColumn::make('name')
-                    ->label('Nama Produk')
-                    ->searchable(),
+                    ->label('Nama Produk'),
 
                 // Kolom kategori
                 TextColumn::make('category.name')

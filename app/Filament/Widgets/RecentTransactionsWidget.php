@@ -19,11 +19,10 @@ class RecentTransactionsWidget extends BaseWidget
     {
         return $table
             ->query(
-                // Ambil 10 transaksi terbaru
-                StockTransaction::query()
-                    ->latest('date')
-                    ->limit(10)
+                // Ambil semua transaksi stok, diurutkan dari yang terbaru
+                StockTransaction::query()->latest('date')
             )
+            ->paginated([5]) // Tampil 5 per halaman, dengan tombol next untuk lihat sisanya
             ->columns([
                 // Kolom nama produk (dari relasi)
                 TextColumn::make('product.name')

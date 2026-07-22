@@ -26,6 +26,10 @@ class AttendanceResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'date';
 
+    protected static ?string $modelLabel = 'Presensi';
+
+    protected static ?string $pluralModelLabel = 'Presensi';
+
     public static function form(Schema $schema): Schema
     {
         return AttendanceForm::configure($schema);

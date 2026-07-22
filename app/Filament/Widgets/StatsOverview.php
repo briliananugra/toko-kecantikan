@@ -10,6 +10,9 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class StatsOverview extends StatsOverviewWidget
 {
+    // Tampil setelah kotak tanggal, sebelum grafik tren kas
+    protected static ?int $sort = 0;
+
     protected function getStats(): array
     {
         // Hitung total semua stok barang
